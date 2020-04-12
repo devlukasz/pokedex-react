@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { getAllPokemon, getPokemon } from "./Service/pokemonService";
-import { PokemonList } from "./Components/PokemonList";
+import PokemonList from "./Components/PokemonList";
+import { Nav } from "./Components/Nav";
 import "./App.css";
+import { Grid } from "@material-ui/core";
 
 function App() {
   const [pokemonData, setPokemonData] = useState([]);
@@ -35,9 +37,12 @@ function App() {
         <h1>LoadingHolder</h1>
       ) : (
         <>
-          {pokemonData.map((pokemon, i) => {
-            return <PokemonList key={pokemon.id} pokemon={pokemon} />;
-          })}
+          <Nav />
+          <Grid container spacing={24} justify="center">
+            {pokemonData.map((pokemon, i) => {
+              return <PokemonList key={pokemon.id} pokemon={pokemon} />;
+            })}
+          </Grid>
         </>
       )}
     </div>
