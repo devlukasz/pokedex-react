@@ -1,21 +1,30 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Card, CardMedia, CardContent, Typography } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 function PokemonList({ pokemon, classes }) {
   return (
     <Card className={classes.pokemon}>
-      <CardMedia
-        className={classes.media}
-        image={pokemon.sprites.front_default}
-      />
+      <Link to={`pokemon/${pokemon.name}`}>
+        <CardMedia
+          className={classes.media}
+          image={pokemon.sprites.front_default}
+        />
+      </Link>
       <CardContent>
         {/* <Typography component="p" variant="h6">
           #{pokemon.id}
         </Typography> */}
-        <Typography className={classes.pokemon_name} component="p" variant="h4">
-          {pokemon.name}
-        </Typography>
+        <Link to={`pokemon/${pokemon.name}`}>
+          <Typography
+            className={classes.pokemon_name}
+            component="p"
+            variant="h4"
+          >
+            {pokemon.name}
+          </Typography>
+        </Link>
         <Typography
           className={classes.pokemon_stats}
           component="p"
