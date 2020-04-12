@@ -1,52 +1,29 @@
-import React, { useState, useEffect } from "react";
-import { getAllPokemon, getPokemon } from "./Service/pokemonService";
-import PokemonList from "./Components/PokemonList";
+import React, { Component } from "react";
+
+import Dashboard from "./Components/Layout/Dashboard";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+
 import { Nav } from "./Components/Nav";
 import "./App.css";
-import { Grid } from "@material-ui/core";
 
-function App() {
-  const [pokemonData, setPokemonData] = useState([]);
-  const [nextUrl, setNextUrl] = useState("");
-  const [prevUrl, setPrevUrl] = useState("");
-  const [loading, setLoading] = useState(true);
-  const initialURL = "https://pokeapi.co/api/v2/pokemon";
-
-  useEffect(() => {
-    async function fetchData() {
-      let response = await getAllPokemon(initialURL);
-      setNextUrl(response.next);
-      setPrevUrl(response.previous);
-      await loadPokemon(response.results);
-      setLoading(false);
-    }
-    fetchData();
-  }, []);
-  const loadPokemon = async (data) => {
-    let _pokemonData = await Promise.all(
-      data.map(async (pokemon) => {
-        let pokemonRecord = await getPokemon(pokemon);
-        return pokemonRecord;
-      })
-    );
-    setPokemonData(_pokemonData);
-  };
-  return (
-    <div>
-      {loading ? (
-        <h1>LoadingHolder</h1>
-      ) : (
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <Nav />
         <>
-          <Nav />
-          <Grid container spacing={24} justify="center">
-            {pokemonData.map((pokemon, i) => {
-              return <PokemonList key={pokemon.id} pokemon={pokemon} />;
-            })}
-          </Grid>
+          <Switch>
+            <Route exact path="/" component={Dashboard} />
+            {/* <Route
+              exact
+              path="/pokemon/:pokemonIndex"
+              component={PokemonDetail}
+            /> */}
+          </Switch>
         </>
-      )}
-    </div>
-  );
+      </Router>
+    );
+  }
 }
 
 export default App;

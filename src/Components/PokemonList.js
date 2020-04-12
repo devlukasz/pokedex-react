@@ -1,67 +1,48 @@
-import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-import { Card, CardMedia, CardContent, Typography } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { getAllPokemon, getPokemon } from "../Service/pokemonService";
+import PokemonCard from "./PokemonCard";
+import { Grid } from "@material-ui/core";
 
-function PokemonList({ pokemon, classes }) {
+function PokemonList() {
+  const [pokemonData, setPokemonData] = useState([]);
+  const [nextUrl, setNextUrl] = useState("");
+  const [prevUrl, setPrevUrl] = useState("");
+  const [loading, setLoading] = useState(true);
+  const initialURL = "https://pokeapi.co/api/v2/pokemon";
+
+  useEffect(() => {
+    async function fetchData() {
+      let response = await getAllPokemon(initialURL);
+      setNextUrl(response.next);
+      setPrevUrl(response.previous);
+      await loadPokemon(response.results);
+      setLoading(false);
+    }
+    fetchData();
+  }, []);
+  const loadPokemon = async (data) => {
+    let _pokemonData = await Promise.all(
+      data.map(async (pokemon) => {
+        let pokemonRecord = await getPokemon(pokemon);
+        return pokemonRecord;
+      })
+    );
+    setPokemonData(_pokemonData);
+  };
   return (
-    <Card className={classes.pokemon}>
-      <CardMedia
-        className={classes.media}
-        image={pokemon.sprites.front_default}
-      />
-      <CardContent>
-        <Typography component="p" variant="h6">
-          #{pokemon.id}
-        </Typography>
-        <Typography component="p" variant="h6">
-          {pokemon.name}
-        </Typography>
-        <Typography
-          className={classes.pokemon_stats}
-          component="p"
-          variant="h6"
-        >
-          Height: {pokemon.height / 10}m
-        </Typography>
-        <Typography
-          className={classes.pokemon_stats}
-          component="p"
-          variant="h6"
-        >
-          Weight: {pokemon.weight / 10}kg
-        </Typography>
-        {pokemon.types.map((type) => {
-          return (
-            <Typography
-              clasName={classes.pokemon_types}
-              component="p"
-              variant="h4"
-            >
-              {type.type.name}
-            </Typography>
-          );
-        })}
-      </CardContent>
-    </Card>
+    <div>
+      {loading ? (
+        <h1>LoadingHolder</h1>
+      ) : (
+        <>
+          <Grid container spacing={24} justify="center">
+            {pokemonData.map((pokemon, i) => {
+              return <PokemonCard key={i} pokemon={pokemon} />;
+            })}
+          </Grid>
+        </>
+      )}
+    </div>
   );
 }
-export default withStyles({
-  pokemon: {
-    minWidth: "400px",
-    margin: "1em",
-    textAlign: "center",
-    boxSizing: "border-box",
-  },
-  pokemon_stats: {
-    margin: "0.5em",
-    textAlign: "left",
-    boxSizing: "border-box",
-  },
-  pokemon_types: {
-    display: "inline-block",
-    boxSizing: "border-box",
-  },
-  media: {
-    minHeight: "200px",
-  },
-})(PokemonList);
+export default PokemonList;
