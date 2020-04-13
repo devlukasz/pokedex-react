@@ -69,10 +69,9 @@ export default withStyles({
     paddingLeft: "0.6em",
   },
   pokemon_stats: {
-    margin: "0.1em",
+    margin: "0.5em",
     paddingLeft: "1em",
     textAlign: "left",
-    boxSizing: "border-box",
   },
   pokemon_name: {
     textTransform: "capitalize",
@@ -80,12 +79,15 @@ export default withStyles({
     paddingLeft: "0.5em",
     transition: "all .2s ease-in-out",
     "&:hover": {
-      transform: "scale(1.03)",
+      transform: "translateY(-10px)",
     },
   },
   pokemon_types: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    margin: "auto",
     textTransform: "uppercase",
-    display: "inline",
   },
   media: {
     margin: "1em",
@@ -96,8 +98,10 @@ export default withStyles({
     borderRadius: "5%",
     filter: "grayscale(50%)",
     transition: "all .2s ease-in-out",
+    imageRendering: "crisp-edges",
+    imageRendering: "pixelated",
     "&:hover": {
-      // transform: "scale(1.03)",
+      transform: "translateY(-10px)",
       filter: "grayscale(0%)",
     },
   },

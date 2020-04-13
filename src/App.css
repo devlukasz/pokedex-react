@@ -10,3 +10,11 @@
   width: 200px;
   justify-content: center;
 }
+
+.button-pagination {
+  display: block;
+  margin: auto;
+  width: 200px;
+  justify-content: center;
+  padding: 5em;
+}

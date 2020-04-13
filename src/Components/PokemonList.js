@@ -68,12 +68,14 @@ function PokemonList() {
               );
             })}
           </Grid>
-          <Button variant="outlined" onClick={prev}>
-            Prev
-          </Button>
-          <Button variant="outlined" onClick={next}>
-            Next
-          </Button>
+          <div className="button-pagination">
+            <Button variant="outlined" onClick={prev}>
+              Prev
+            </Button>
+            <Button variant="outlined" onClick={next}>
+              Next
+            </Button>
+          </div>
         </>
       )}
     </div>
