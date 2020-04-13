@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import Dashboard from "./Components/Layout/Dashboard";
-import { PokemonDetail } from "./Components/PokemonDetail";
+import PokemonDetail from "./Components/PokemonDetail";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
-
 import { Nav } from "./Components/Nav";
 import "./App.css";
 

@@ -35,9 +35,15 @@ function PokemonList() {
         <h1>LoadingHolder</h1>
       ) : (
         <>
-          <Grid container spacing={24} justify="center">
+          <Grid container justify="center">
             {pokemonData.map((pokemon, i) => {
-              return <PokemonCard key={i} pokemon={pokemon} />;
+              return (
+                <PokemonCard
+                  to={`/pokemon/${pokemon.name}`}
+                  key={i}
+                  pokemon={pokemon}
+                />
+              );
             })}
           </Grid>
         </>

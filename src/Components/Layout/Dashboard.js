@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import PokemonList from "../PokemonList";
 
 export default class Dashboard extends Component {

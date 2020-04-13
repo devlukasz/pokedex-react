@@ -1,5 +1,15 @@
-import React from "react";
+import React, { Component } from "react";
 
-export const PokemonDetail = ({ pokemon }) => {
-  return <div>hi</div>;
-};
+class PokemonDetail extends Component {
+  render() {
+    const { match } = this.props;
+    return (
+      <>
+        <div>hi</div>
+        <p>{match.params.pokemon}</p>
+      </>
+    );
+  }
+}
+
+export default PokemonDetail;
