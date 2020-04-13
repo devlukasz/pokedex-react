@@ -3,3 +3,10 @@
 * {
   font-family: "Orbitron", "sans-serif" !important;
 }
+
+.spinner {
+  display: block;
+  margin: auto;
+  width: 200px;
+  justify-content: center;
+}

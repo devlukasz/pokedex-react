@@ -78,6 +78,10 @@ export default withStyles({
     textTransform: "capitalize",
     marginBottom: "0.5em",
     paddingLeft: "0.5em",
+    transition: "all .2s ease-in-out",
+    "&:hover": {
+      transform: "scale(1.03)",
+    },
   },
   pokemon_types: {
     textTransform: "uppercase",
@@ -89,5 +93,12 @@ export default withStyles({
     paddingTop: "2em",
     paddingBottom: "2em",
     backgroundColor: "#F5F5F5",
+    borderRadius: "5%",
+    filter: "grayscale(50%)",
+    transition: "all .2s ease-in-out",
+    "&:hover": {
+      // transform: "scale(1.03)",
+      filter: "grayscale(0%)",
+    },
   },
 })(PokemonCard);

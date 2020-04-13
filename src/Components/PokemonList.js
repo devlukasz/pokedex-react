@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { getAllPokemon, getPokemon } from "../Service/pokemonService";
 import PokemonCard from "./PokemonCard";
 import { Grid, Button } from "@material-ui/core";
+import spinner from "../Assets/Spinner-0.4s-361px.gif";
+import "../App.css";
 
 function PokemonList() {
   const [pokemonData, setPokemonData] = useState([]);
@@ -52,15 +54,15 @@ function PokemonList() {
   return (
     <div>
       {loading ? (
-        <h1>LoadingHolder</h1>
+        <img className="spinner" src={spinner} alt="Loading" />
       ) : (
         <>
           <Grid container justify="center">
-            {pokemonData.map((pokemon, i) => {
+            {pokemonData.map((pokemon) => {
               return (
                 <PokemonCard
                   to={`/pokemon/${pokemon.name}`}
-                  key={i}
+                  key={pokemon.name}
                   pokemon={pokemon}
                 />
               );
