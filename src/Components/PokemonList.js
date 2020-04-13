@@ -20,6 +20,26 @@ function PokemonList() {
     }
     fetchData();
   }, []);
+
+  const next = async () => {
+    setLoading(true);
+    let data = await getAllPokemon(nextUrl);
+    await loadPokemon(data.results);
+    setNextUrl(data.next);
+    setPrevUrl(data.previous);
+    setLoading(false);
+  };
+
+  const prev = async () => {
+    if (!prevUrl) return;
+    setLoading(true);
+    let data = await getAllPokemon(prevUrl);
+    await loadPokemon(data.results);
+    setNextUrl(data.next);
+    setPrevUrl(data.previous);
+    setLoading(false);
+  };
+
   const loadPokemon = async (data) => {
     let _pokemonData = await Promise.all(
       data.map(async (pokemon) => {
@@ -35,6 +55,8 @@ function PokemonList() {
         <h1>LoadingHolder</h1>
       ) : (
         <>
+          <button onClick={prev}>Prev</button>
+          <button onClick={next}>Next</button>
           <Grid container justify="center">
             {pokemonData.map((pokemon, i) => {
               return (

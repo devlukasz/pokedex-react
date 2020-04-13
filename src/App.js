@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Dashboard from "./Components/Layout/Dashboard";
-import PokemonDetail from "./Components/PokemonDetail";
+import PokemonDetailContainer from "./Components/PokemonDetailContainer";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { Nav } from "./Components/Nav";
 import "./App.css";
@@ -13,7 +13,11 @@ class App extends Component {
         <>
           <Switch>
             <Route exact path="/" component={Dashboard} />
-            <Route exact path="/pokemon/:pokemon/" component={PokemonDetail} />
+            <Route
+              exact
+              path="/pokemon/:pokemon/"
+              component={PokemonDetailContainer}
+            />
           </Switch>
         </>
       </Router>

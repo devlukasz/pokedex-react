@@ -1,15 +1,7 @@
-import React, { Component } from "react";
-
-class PokemonDetail extends Component {
-  render() {
-    const { match } = this.props;
-    return (
-      <>
-        <div>hi</div>
-        <p>{match.params.pokemon}</p>
-      </>
-    );
-  }
-}
+import React from "react";
+// import PokemonCard from "./PokemonCard";
+const PokemonDetail = ({ pokemon }) => {
+  return <h1>{pokemon}</h1>;
+};
 
 export default PokemonDetail;

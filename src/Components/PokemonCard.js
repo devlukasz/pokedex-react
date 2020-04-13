@@ -4,7 +4,7 @@ import { Card, CardMedia, CardContent, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import "../App.css";
 
-function PokemonList({ pokemon, classes, to }) {
+function PokemonCard({ pokemon, classes, to = "" }) {
   const idOfPokemon = "" + pokemon.id;
   const fillNumbers = "000";
   const pokemon_id =
@@ -12,7 +12,7 @@ function PokemonList({ pokemon, classes, to }) {
     idOfPokemon;
   return (
     <Card className={classes.pokemon}>
-      <Link to={to}>
+      <Link style={{ textDecoration: "none" }} to={to}>
         <CardMedia
           className={classes.media}
           image={pokemon.sprites.front_default}
@@ -22,7 +22,7 @@ function PokemonList({ pokemon, classes, to }) {
         <Typography className={classes.pokemon_id} component="p" variant="h6">
           #{pokemon_id}
         </Typography>
-        <Link to={to}>
+        <Link style={{ textDecoration: "none", color: "inherit" }} to={to}>
           <Typography
             className={classes.pokemon_name}
             component="p"
@@ -93,4 +93,4 @@ export default withStyles({
     paddingBottom: "2em",
     backgroundColor: "#F5F5F5",
   },
-})(PokemonList);
+})(PokemonCard);
