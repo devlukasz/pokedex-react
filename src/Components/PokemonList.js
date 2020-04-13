@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getAllPokemon, getPokemon } from "../Service/pokemonService";
 import PokemonCard from "./PokemonCard";
-import { Grid } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 
 function PokemonList() {
   const [pokemonData, setPokemonData] = useState([]);
@@ -55,8 +55,6 @@ function PokemonList() {
         <h1>LoadingHolder</h1>
       ) : (
         <>
-          <button onClick={prev}>Prev</button>
-          <button onClick={next}>Next</button>
           <Grid container justify="center">
             {pokemonData.map((pokemon, i) => {
               return (
@@ -68,6 +66,12 @@ function PokemonList() {
               );
             })}
           </Grid>
+          <Button variant="outlined" onClick={prev}>
+            Prev
+          </Button>
+          <Button variant="outlined" onClick={next}>
+            Next
+          </Button>
         </>
       )}
     </div>

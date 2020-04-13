@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { Card, CardMedia, CardContent, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import "../App.css";
+import pokemonTypesColor from "./Helpers/pokemonTypesColor";
 
 function PokemonCard({ pokemon, classes, to = "" }) {
   const idOfPokemon = "" + pokemon.id;
@@ -44,6 +45,7 @@ function PokemonCard({ pokemon, classes, to = "" }) {
               className={classes.pokemon_types}
               component="p"
               variant="h6"
+              style={{ color: pokemonTypesColor[type.type.name] }}
             >
               {type.type.name}
             </Typography>
@@ -79,12 +81,7 @@ export default withStyles({
   },
   pokemon_types: {
     textTransform: "uppercase",
-    alignItems: "center",
     display: "inline",
-    marginTop: "1em",
-    paddingRight: "1em",
-    textAlign: "center",
-    boxSizing: "border-box",
   },
   media: {
     margin: "1em",
