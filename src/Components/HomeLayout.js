@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { getAllPokemon, getPokemon } from "../Service/pokemonService";
-import PokemonCard from "./PokemonCard";
+import PokemonCard from "./PokemonCard/PokemonCard";
 import { Grid, Button } from "@material-ui/core";
 import spinner from "../Assets/Spinner-0.4s-361px.gif";
 import "../App.css";
 
-function PokemonList() {
+function HomeLayout() {
   const [pokemonData, setPokemonData] = useState([]);
   const [nextUrl, setNextUrl] = useState("");
   const [prevUrl, setPrevUrl] = useState("");
@@ -20,6 +20,7 @@ function PokemonList() {
       await loadPokemon(response.results);
       setLoading(false);
     }
+
     fetchData();
   }, []);
 
@@ -58,15 +59,15 @@ function PokemonList() {
       ) : (
         <>
           <Grid container justify="center">
-            {pokemonData.map((pokemon) => {
-              return (
+            {pokemonData.map((pokemon) => (
+              <Grid sm={12} xs={12} md={4} lg={4} xl={4}>
                 <PokemonCard
                   to={`/pokemon/${pokemon.name}`}
                   key={pokemon.name}
                   pokemon={pokemon}
                 />
-              );
-            })}
+              </Grid>
+            ))}
           </Grid>
           <div className="button-pagination">
             <Button variant="outlined" onClick={prev}>
@@ -81,4 +82,5 @@ function PokemonList() {
     </div>
   );
 }
-export default PokemonList;
+
+export default HomeLayout;

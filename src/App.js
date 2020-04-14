@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Dashboard from "./Components/Layout/Dashboard";
-import PokemonDetailContainer from "./Components/PokemonDetailContainer";
+import PokemonDetailContainer from "./Components/PokemonDetails/PokemonDetailContainer";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { Nav } from "./Components/Nav";
 import "./App.css";
