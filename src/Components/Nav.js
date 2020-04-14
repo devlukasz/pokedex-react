@@ -1,5 +1,7 @@
 import React from "react";
 
 export const Nav = () => {
-  return <h1>Pokedex Project</h1>;
+  return (
+    <h1 style={{ textAlign: "center" }}>Temporary Navbar // Pokedex Project</h1>
+  );
 };
