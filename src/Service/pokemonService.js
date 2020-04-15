@@ -24,6 +24,16 @@ export async function getAllPokemon(url) {
       });
   });
 }
+export async function getAllPokemonByType(url, item) {
+  return new Promise((resolve, reject) => {
+    fetch(`${url}/${item}`)
+      .then((res) => res.json())
+      .then((data) => {
+        resolve(data);
+      });
+  });
+}
+
 export async function fetchPokemonByName(name) {
   const cachedPokemon = pokemons.find((p) => p.name === name);
   if (cachedPokemon) {
