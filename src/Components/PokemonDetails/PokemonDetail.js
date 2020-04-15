@@ -34,6 +34,7 @@ const PokemonDetail = ({ pokemonName, classes }) => {
         //TODO proper error handling
       });
   }, [pokemonName]);
+
   if (pokemon === null || pokemonSpecies === null) {
     return null;
   }
@@ -114,7 +115,7 @@ const PokemonDetail = ({ pokemonName, classes }) => {
                   component="p"
                   variant="p"
                 >
-                  Height
+                  Height:
                 </Typography>
                 <Typography
                   className={classes.pokemon_stats_value}
@@ -129,7 +130,7 @@ const PokemonDetail = ({ pokemonName, classes }) => {
                   component="p"
                   variant="p"
                 >
-                  Weight
+                  Weight:
                 </Typography>
                 <Typography
                   className={classes.pokemon_stats_value}
@@ -149,7 +150,7 @@ const PokemonDetail = ({ pokemonName, classes }) => {
                     component="p"
                     variant="h6"
                   >
-                    {ability.ability.name}
+                    Ability: {ability.ability.name}
                   </Typography>
                 );
               })}
@@ -235,10 +236,11 @@ export default withStyles({
     textTransform: "uppercase",
   },
   pokemon_name: {
+    fontSize: "1.5rem",
+    fontWeight: "600",
     textTransform: "capitalize",
     marginBottom: "0.5em",
     transition: "all .2s ease-in-out",
-    fontSize: "1.5rem",
     color: "#0a0a0a !important",
   },
   pokemon_details: {
@@ -278,14 +280,9 @@ export default withStyles({
     marginBottom: 0,
     backgroundColor: "#F5F5F5",
     borderRadius: "5%",
-    filter: "grayscale(50%)",
     transition: "all .2s ease-in-out",
     imageRendering: "crisp-edges",
     imageRendering: "pixelated",
-    "&:hover": {
-      transform: "translateY(-10px)",
-      filter: "grayscale(0%)",
-    },
   },
   cardHeader: {
     padding: "4px",

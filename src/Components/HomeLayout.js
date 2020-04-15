@@ -10,7 +10,7 @@ function HomeLayout() {
   const [nextUrl, setNextUrl] = useState("");
   const [prevUrl, setPrevUrl] = useState("");
   const [loading, setLoading] = useState(true);
-  const initialURL = "https://pokeapi.co/api/v2/pokemon";
+  const initialURL = `https://pokeapi.co/api/v2/pokemon?limit=${18}`;
 
   useEffect(() => {
     async function fetchData() {
@@ -23,6 +23,17 @@ function HomeLayout() {
 
     fetchData();
   }, []);
+
+  const loadPokemon = async (data) => {
+    let _pokemonData = await Promise.all(
+      data.map(async (pokemon) => {
+        let pokemonRecord = await getPokemon(pokemon);
+        return pokemonRecord;
+      })
+    );
+
+    setPokemonData(_pokemonData);
+  };
 
   const next = async () => {
     setLoading(true);
@@ -43,15 +54,6 @@ function HomeLayout() {
     setLoading(false);
   };
 
-  const loadPokemon = async (data) => {
-    let _pokemonData = await Promise.all(
-      data.map(async (pokemon) => {
-        let pokemonRecord = await getPokemon(pokemon);
-        return pokemonRecord;
-      })
-    );
-    setPokemonData(_pokemonData);
-  };
   return (
     <div>
       {loading ? (
@@ -65,10 +67,12 @@ function HomeLayout() {
                   to={`/pokemon/${pokemon.name}`}
                   key={pokemon.name}
                   pokemon={pokemon}
+                  pokemonData={pokemonData}
                 />
               </Grid>
             ))}
           </Grid>
+
           <div className="button-pagination">
             <Button variant="outlined" onClick={prev}>
               Prev

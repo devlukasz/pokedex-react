@@ -3,7 +3,6 @@ import axios from "axios";
 const POKEAPI_URL = "https://pokeapi.co/api/v2";
 const POKEMON_ENDPOINT = "/pokemon";
 const POKEMON_SPECIES_ENDPOINT = "/pokemon-species";
-
 const pokemons = [];
 
 export function getPokemon({ url }) {

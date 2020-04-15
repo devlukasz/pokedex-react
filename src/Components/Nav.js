@@ -18,11 +18,11 @@ export const Nav = () => {
             Pokedex Project
           </Typography>
 
-          <Hidden smDown>
+          {/* <Hidden smDown>
             <div className={classes.search}>
               <Typography variant="h6">Surprise me</Typography>
             </div>
-          </Hidden>
+          </Hidden> */}
 
           <div className={classes.search}>
             <InputBase
@@ -51,10 +51,10 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "none",
   },
   searchButton: {
-    backgroundColor: "#ff3860",
+    backgroundColor: "black",
     color: "#fff",
     "&:hover": {
-      backgroundColor: "#ff3860",
+      backgroundColor: "grey",
     },
   },
   menuButton: {
