@@ -57,7 +57,6 @@ function HomeLayout({ classes }) {
   const [search, setSearch] = useState("");
   const [open, setOpen] = React.useState(false);
   // const [filtered, setFiltered] = React.useState([]);
-  const initialURLType = `https://pokeapi.co/api/v2/type`;
 
   useEffect(() => {
     async function fetchData() {
@@ -68,7 +67,6 @@ function HomeLayout({ classes }) {
       await loadPokemon(response.results);
       setLoading(false);
     }
-
     fetchData();
   }, [initialURL]);
 
@@ -79,10 +77,8 @@ function HomeLayout({ classes }) {
         return pokemonRecord;
       })
     );
-
     setPokemonData(_pokemonData);
   };
-  // console.log(pokemonData);
 
   const next = async () => {
     setLoading(true);

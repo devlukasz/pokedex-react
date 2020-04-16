@@ -28,13 +28,12 @@ const PokemonDetail = ({ pokemonName, classes }) => {
   useEffect(() => {
     getAllPokemonByName(pokemonName)
       .then((pokemon) => {
-        setLoading(true);
         setPokemon(pokemon);
         return getPokemonBySpecies(pokemon.species.name);
       })
       .then((species) => {
-        setLoading(false);
         setPokemonSpecies(species);
+        setLoading(false);
       })
       .catch((e) => {
         // console.log("wow");
