@@ -54,16 +54,14 @@ function HomeLayout({ classes }) {
   const [loading, setLoading] = useState(true);
   const initialURL = `https://pokeapi.co/api/v2/pokemon?limit=${18}`;
   const [item, setItem] = useState([]);
-  const [search, setSearch] = useState("");
   const [open, setOpen] = React.useState(false);
-  // const [filtered, setFiltered] = React.useState([]);
 
   useEffect(() => {
     async function fetchData() {
       let response = await getAllPokemon(initialURL);
       setNextUrl(response.next);
       setPrevUrl(response.previous);
-      // setFiltered(response);
+
       await loadPokemon(response.results);
       setLoading(false);
     }
@@ -150,14 +148,6 @@ function HomeLayout({ classes }) {
     return classes.selected;
   };
 
-  // function filterData() {
-  //   setFiltered(
-  //     pokemonData.filter(
-  //       (n) => n.name === { search } && n.age === "valueFromTextInput"
-  //     )
-  //   );
-  // }
-
   return (
     <div>
       {loading ? (
@@ -174,7 +164,6 @@ function HomeLayout({ classes }) {
               </>
             }
           />
-          {/* <Search search={search} /> */}
           <Grid container justify="center">
             {pokemonData.map((pokemon, index) => (
               <Grid sm={12} xs={12} md={4} lg={4} xl={4} key={index}>
