@@ -3,7 +3,6 @@ import {
   getAllPokemon,
   getAllPokemonByType,
   getPokemon,
-  getAllPokemonByName,
 } from "../Service/pokemonService";
 import PokemonCard from "./PokemonCard/PokemonCard";
 import { Button, Grid } from "@material-ui/core";
@@ -18,34 +17,13 @@ import CardHeader from "@material-ui/core/CardHeader";
 import IconButton from "@material-ui/core/IconButton";
 import Slide from "@material-ui/core/Slide";
 import { withStyles } from "@material-ui/core/styles";
-import Search from "./Search";
 import clsx from "clsx";
 import pokemonTypesColor from "./Helpers/pokemonTypesColor";
+import types from ".././Components/Helpers/typesOfPokemon";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
-const types = [
-  "normal",
-  "fighting",
-  "flying",
-  "poison",
-  "ground",
-  "rock",
-  "bug",
-  "ghost",
-  "steel",
-  "fire",
-  "water",
-  "grass",
-  "electric",
-  "psychic",
-  "ice",
-  "dragon",
-  "dark",
-  "fairy",
-];
 
 function HomeLayout({ classes }) {
   const [pokemonData, setPokemonData] = useState([]);

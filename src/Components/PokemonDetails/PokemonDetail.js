@@ -34,9 +34,7 @@ const PokemonDetail = ({ pokemonName, classes }) => {
         setPokemonSpecies(species);
         setLoading(false);
       })
-      .catch((e) => {
-        // console.log("wow");
-      });
+      .catch((e) => {});
   }, [pokemonName]);
 
   if (pokemon === null || pokemonSpecies === null) {
