@@ -24,7 +24,7 @@ export const Nav = () => {
             </div>
           </Hidden> */}
 
-          <div className={classes.search}>
+          {/* <div className={classes.search}>
             <InputBase
               placeholder="Pokemon Name"
               classes={{
@@ -34,7 +34,7 @@ export const Nav = () => {
               inputProps={{ "aria-label": "search" }}
             />
             <Button className={classes.searchButton}>Search</Button>
-          </div>
+          </div> */}
         </Toolbar>
       </AppBar>
     </div>

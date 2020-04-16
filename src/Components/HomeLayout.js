@@ -3,6 +3,7 @@ import {
   getAllPokemon,
   getAllPokemonByType,
   getPokemon,
+  getAllPokemonByName,
 } from "../Service/pokemonService";
 import PokemonCard from "./PokemonCard/PokemonCard";
 import { Button, Grid } from "@material-ui/core";
@@ -17,6 +18,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import IconButton from "@material-ui/core/IconButton";
 import Slide from "@material-ui/core/Slide";
 import { withStyles } from "@material-ui/core/styles";
+import Search from "./Search";
 import clsx from "clsx";
 import pokemonTypesColor from "./Helpers/pokemonTypesColor";
 
@@ -52,7 +54,9 @@ function HomeLayout({ classes }) {
   const [loading, setLoading] = useState(true);
   const initialURL = `https://pokeapi.co/api/v2/pokemon?limit=${18}`;
   const [item, setItem] = useState([]);
+  const [search, setSearch] = useState("");
   const [open, setOpen] = React.useState(false);
+  // const [filtered, setFiltered] = React.useState([]);
   const initialURLType = `https://pokeapi.co/api/v2/type`;
 
   useEffect(() => {
@@ -60,6 +64,7 @@ function HomeLayout({ classes }) {
       let response = await getAllPokemon(initialURL);
       setNextUrl(response.next);
       setPrevUrl(response.previous);
+      // setFiltered(response);
       await loadPokemon(response.results);
       setLoading(false);
     }
@@ -77,6 +82,7 @@ function HomeLayout({ classes }) {
 
     setPokemonData(_pokemonData);
   };
+  // console.log(pokemonData);
 
   const next = async () => {
     setLoading(true);
@@ -119,16 +125,14 @@ function HomeLayout({ classes }) {
     if (item !== null) {
       setLoading(true);
       let pokemonList = [];
-
       async function fetchData() {
         for (let i = 0; i < item.length; i++) {
-          let response = await getAllPokemonByType(initialURLType, item[i]);
+          let response = await getAllPokemonByType(item[i]);
           const pokemons = [...response.pokemon, ...pokemonList];
           pokemonList = pokemons.slice(0);
         }
         await loadPokemonByFilter(pokemonList);
       }
-
       fetchData().then();
     }
   }, [item]);
@@ -150,6 +154,14 @@ function HomeLayout({ classes }) {
     return classes.selected;
   };
 
+  // function filterData() {
+  //   setFiltered(
+  //     pokemonData.filter(
+  //       (n) => n.name === { search } && n.age === "valueFromTextInput"
+  //     )
+  //   );
+  // }
+
   return (
     <div>
       {loading ? (
@@ -166,7 +178,7 @@ function HomeLayout({ classes }) {
               </>
             }
           />
-
+          {/* <Search search={search} /> */}
           <Grid container justify="center">
             {pokemonData.map((pokemon, index) => (
               <Grid sm={12} xs={12} md={4} lg={4} xl={4} key={index}>
@@ -179,7 +191,6 @@ function HomeLayout({ classes }) {
               </Grid>
             ))}
           </Grid>
-
           <Dialog
             open={open}
             onClose={handleCloseFilter}
@@ -190,7 +201,7 @@ function HomeLayout({ classes }) {
           >
             <DialogTitle id="alert-dialog-title">
               <FilterList />
-              &nbsp;{"Filter List"}
+              &nbsp;{"Filter!"}
             </DialogTitle>
             <DialogContent className={classes.dialog_content}>
               {types.map((type, index) => (
@@ -205,7 +216,6 @@ function HomeLayout({ classes }) {
               ))}
             </DialogContent>
           </Dialog>
-
           <div className="button-pagination">
             <Button variant="outlined" onClick={prev}>
               Prev
@@ -224,7 +234,7 @@ export default withStyles({
   chip_list_item: {
     marginLeft: "1%",
     marginTop: "1%",
-    fontWeight: "600",
+    fontWeight: "300",
     letterSpacing: "1px",
   },
   dialog_content: {

@@ -9,8 +9,10 @@ import {
 } from "@material-ui/core";
 import pokemonTypesColor from "../Helpers/pokemonTypesColor";
 import {
-  fetchPokemonByName,
-  fetchPokemonSpeciesByName,
+  // fetchPokemonByName,
+  // fetchPokemonSpeciesByName,
+  getAllPokemonByName,
+  getPokemonBySpecies,
 } from "../../Service/pokemonService";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
@@ -22,10 +24,10 @@ const PokemonDetail = ({ pokemonName, classes }) => {
   const [pokemonSpecies, setPokemonSpecies] = useState(null);
 
   useEffect(() => {
-    fetchPokemonByName(pokemonName)
+    getAllPokemonByName(pokemonName)
       .then((pokemon) => {
         setPokemon(pokemon);
-        return fetchPokemonSpeciesByName(pokemon.species.name);
+        return getPokemonBySpecies(pokemon.species.name);
       })
       .then((species) => {
         setPokemonSpecies(species);
