@@ -9,8 +9,6 @@ import {
 } from "@material-ui/core";
 import pokemonTypesColor from "../Helpers/pokemonTypesColor";
 import {
-  // fetchPokemonByName,
-  // fetchPokemonSpeciesByName,
   getAllPokemonByName,
   getPokemonBySpecies,
 } from "../../Service/pokemonService";
@@ -26,6 +24,7 @@ const PokemonDetail = ({ pokemonName, classes }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     getAllPokemonByName(pokemonName)
       .then((pokemon) => {
         setPokemon(pokemon);

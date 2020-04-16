@@ -52,29 +52,3 @@ export async function getPokemonBySpecies(name) {
       });
   });
 }
-
-// export async function fetchPokemonByName(name) {
-//   const cachedPokemon = pokemons.find((p) => p.name === name);
-//   if (cachedPokemon) {
-//     return cachedPokemon;
-//   }
-//   try {
-//     const { data } = await axios.get(
-//       `${POKEAPI_URL}${POKEMON_ENDPOINT}/${name}`
-//     );
-//     pokemons.push(data);
-//     return data;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
-// export async function fetchPokemonSpeciesByName(name) {
-//   try {
-//     const { data } = await axios.get(
-//       `${POKEAPI_URL}${POKEMON_SPECIES_ENDPOINT}/${name}`
-//     );
-//     return data;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
