@@ -15,6 +15,7 @@ import {
   getPokemonBySpecies,
 } from "../../Service/pokemonService";
 import Grid from "@material-ui/core/Grid";
+import spinner from "../../Assets/Spinner-0.4s-361px.gif";
 import Divider from "@material-ui/core/Divider";
 import CardHeader from "@material-ui/core/CardHeader";
 import LinearProgress from "@material-ui/core/LinearProgress";
@@ -22,18 +23,21 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 const PokemonDetail = ({ pokemonName, classes }) => {
   const [pokemon, setPokemon] = useState(null);
   const [pokemonSpecies, setPokemonSpecies] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getAllPokemonByName(pokemonName)
       .then((pokemon) => {
+        setLoading(true);
         setPokemon(pokemon);
         return getPokemonBySpecies(pokemon.species.name);
       })
       .then((species) => {
+        setLoading(false);
         setPokemonSpecies(species);
       })
       .catch((e) => {
-        //TODO proper error handling
+        // console.log("wow");
       });
   }, [pokemonName]);
 
@@ -51,140 +55,146 @@ const PokemonDetail = ({ pokemonName, classes }) => {
     idOfPokemon;
 
   return (
-    <Grid container direction="row">
-      <Grid xs={12} sm={12} md={4} lg={4} xl={4}>
-        <Card className={classes.pokemon}>
-          <CardMedia
-            className={classes.media}
-            image={pokemon.sprites.front_default}
-          />
+    <div>
+      {loading ? (
+        <img className="spinner" src={spinner} alt="Loading" />
+      ) : (
+        <Grid container direction="row">
+          <Grid xs={12} sm={12} md={4} lg={4} xl={4}>
+            <Card className={classes.pokemon}>
+              <CardMedia
+                className={classes.media}
+                image={pokemon.sprites.front_default}
+              />
 
-          <CardContent className={classes.cardContent}>
-            <div className={classes.cardDetails}>
-              <Typography
-                className={classes.pokemon_id}
-                component="p"
-                variant="h6"
-              >
-                #{pokemon_id}
-              </Typography>
-
-              <Typography
-                className={classes.pokemon_name}
-                component="p"
-                variant="h4"
-              >
-                {pokemon.name}
-              </Typography>
-              <Typography
-                className={classes.pokemon_description}
-                component="p"
-                variant="p"
-              >
-                {description}
-              </Typography>
-
-              <Divider className={classes.divider} />
-              <div className={classes.footerSection}>
-                {pokemon.types.map((type, i) => {
-                  return (
-                    <Typography
-                      key={i}
-                      className={classes.pokemon_types}
-                      component="p"
-                      variant="h6"
-                      style={{ color: pokemonTypesColor[type.type.name] }}
-                    >
-                      {type.type.name}
-                    </Typography>
-                  );
-                })}
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </Grid>
-
-      <Grid xs={12} sm={12} md={8} lg={8} xl={8}>
-        <Card className={classes.details}>
-          <CardHeader title={"Details"} className={classes.cardHeader} />
-          <Divider />
-          <Grid container direction="row">
-            <Grid xs={12} sm={12} md={6} lg={6} xl={6}>
-              <div className={classes.valueDetailsSection}>
-                <Typography
-                  className={classes.pokemon_stats_title}
-                  component="p"
-                  variant="p"
-                >
-                  Height:
-                </Typography>
-                <Typography
-                  className={classes.pokemon_stats_value}
-                  component="p"
-                  variant="p"
-                >
-                  {pokemon.height / 10} m
-                </Typography>
-
-                <Typography
-                  className={classes.pokemon_stats_title}
-                  component="p"
-                  variant="p"
-                >
-                  Weight:
-                </Typography>
-                <Typography
-                  className={classes.pokemon_stats_value}
-                  component="p"
-                  variant="p"
-                >
-                  {pokemon.weight / 10} kg
-                </Typography>
-              </div>
-            </Grid>
-            <Grid xs={12} sm={12} md={6} lg={6} xl={6}>
-              {pokemon.abilities.map((ability, i) => {
-                return (
+              <CardContent className={classes.cardContent}>
+                <div className={classes.cardDetails}>
                   <Typography
-                    key={i}
-                    className={classes.pokemon_types_details}
+                    className={classes.pokemon_id}
                     component="p"
                     variant="h6"
                   >
-                    Ability: {ability.ability.name}
+                    #{pokemon_id}
                   </Typography>
+
+                  <Typography
+                    className={classes.pokemon_name}
+                    component="p"
+                    variant="h4"
+                  >
+                    {pokemon.name}
+                  </Typography>
+                  <Typography
+                    className={classes.pokemon_description}
+                    component="p"
+                    variant="p"
+                  >
+                    {description}
+                  </Typography>
+
+                  <Divider className={classes.divider} />
+                  <div className={classes.footerSection}>
+                    {pokemon.types.map((type, i) => {
+                      return (
+                        <Typography
+                          key={i}
+                          className={classes.pokemon_types}
+                          component="p"
+                          variant="h6"
+                          style={{ color: pokemonTypesColor[type.type.name] }}
+                        >
+                          {type.type.name}
+                        </Typography>
+                      );
+                    })}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid xs={12} sm={12} md={8} lg={8} xl={8}>
+            <Card className={classes.details}>
+              <CardHeader title={"Details"} className={classes.cardHeader} />
+              <Divider />
+              <Grid container direction="row">
+                <Grid xs={12} sm={12} md={6} lg={6} xl={6}>
+                  <div className={classes.valueDetailsSection}>
+                    <Typography
+                      className={classes.pokemon_stats_title}
+                      component="p"
+                      variant="p"
+                    >
+                      Height:
+                    </Typography>
+                    <Typography
+                      className={classes.pokemon_stats_value}
+                      component="p"
+                      variant="p"
+                    >
+                      {pokemon.height / 10} m
+                    </Typography>
+
+                    <Typography
+                      className={classes.pokemon_stats_title}
+                      component="p"
+                      variant="p"
+                    >
+                      Weight:
+                    </Typography>
+                    <Typography
+                      className={classes.pokemon_stats_value}
+                      component="p"
+                      variant="p"
+                    >
+                      {pokemon.weight / 10} kg
+                    </Typography>
+                  </div>
+                </Grid>
+                <Grid xs={12} sm={12} md={6} lg={6} xl={6}>
+                  {pokemon.abilities.map((ability, i) => {
+                    return (
+                      <Typography
+                        key={i}
+                        className={classes.pokemon_types_details}
+                        component="p"
+                        variant="h6"
+                      >
+                        Ability: {ability.ability.name}
+                      </Typography>
+                    );
+                  })}
+                </Grid>
+              </Grid>
+              <Divider />
+              <CardHeader title={"Stats"} className={classes.cardHeaderStats} />
+              <Divider />
+              {pokemon.stats.map((stat) => {
+                return (
+                  <>
+                    <Typography
+                      className={classes.pokemon_stats_meter_title}
+                      component="p"
+                      variant="p"
+                    >
+                      {stat.stat.name} : {stat.base_stat}
+                    </Typography>
+                    <div className={classes.pokemon_stats_meter_title}>
+                      <BorderLinearProgress
+                        className={classes.margin}
+                        variant="determinate"
+                        color="secondary"
+                        value={stat.base_stat}
+                      />
+                    </div>
+                  </>
                 );
               })}
-            </Grid>
+            </Card>
           </Grid>
-          <Divider />
-          <CardHeader title={"Stats"} className={classes.cardHeaderStats} />
-          <Divider />
-          {pokemon.stats.map((stat) => {
-            return (
-              <>
-                <Typography
-                  className={classes.pokemon_stats_meter_title}
-                  component="p"
-                  variant="p"
-                >
-                  {stat.stat.name} : {stat.base_stat}
-                </Typography>
-                <div className={classes.pokemon_stats_meter_title}>
-                  <BorderLinearProgress
-                    className={classes.margin}
-                    variant="determinate"
-                    color="secondary"
-                    value={stat.base_stat}
-                  />
-                </div>
-              </>
-            );
-          })}
-        </Card>
-      </Grid>
-    </Grid>
+        </Grid>
+      )}
+    </div>
   );
 };
 
